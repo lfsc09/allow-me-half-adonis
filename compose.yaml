@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: allow-half-db
+    secrets:
+      - db_password
+    environment:
+      POSTGRES_DB: allow-half
+      POSTGRES_USER: allow-half
+      POSTGRES_PASSWORD: /run/secrets/db_password
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'myuser']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - '5432:5432'
+    networks:
+      - allow-me-half-next
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
+
+networks:
+  allow-me-half-next:
+    driver: bridge
