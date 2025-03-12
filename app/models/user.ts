@@ -23,6 +23,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   }
 
   @column()
+  declare isAdmin: boolean
+
+  @column()
   declare email: string
 
   @column({ serializeAs: null })
@@ -36,6 +39,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column()
   declare rgm: string
+
+  @column()
+  declare cardCode: string
 
   @column.date()
   declare validUntil: DateTime
