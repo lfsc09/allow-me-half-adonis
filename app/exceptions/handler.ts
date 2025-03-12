@@ -1,6 +1,9 @@
 import app from '@adonisjs/core/services/app'
 import { HttpContext, ExceptionHandler } from '@adonisjs/core/http'
 import type { StatusPageRange, StatusPageRenderer } from '@adonisjs/core/types/http'
+import { errors as coreErrors } from '@adonisjs/core'
+import { errors as authErrors } from '@adonisjs/auth'
+import { errors as lucidErrors } from '@adonisjs/lucid'
 
 export default class HttpExceptionHandler extends ExceptionHandler {
   /**
@@ -34,6 +37,10 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    * response to the client
    */
   async handle(error: unknown, ctx: HttpContext) {
+    if (error instanceof coreErrors.E_ROUTE_NOT_FOUND) return ctx.response.redirect('/home')
+    else if (error instanceof authErrors.E_UNAUTHORIZED_ACCESS)
+      return ctx.response.redirect('/login')
+    else if (error instanceof lucidErrors.E_ROW_NOT_FOUND) return ctx.response.redirect('/logout')
     return super.handle(error, ctx)
   }
 
