@@ -1,9 +1,10 @@
 import { DateTime } from 'luxon'
-import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
-import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
+import hash from '@adonisjs/core/services/hash'
+import { BaseModel, beforeCreate, column } from '@adonisjs/lucid/orm'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
+import { randomUUID } from 'crypto'
+import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -11,17 +12,33 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 })
 
 export default class User extends compose(BaseModel, AuthFinder) {
-  @column({ isPrimary: true })
-  declare id: number
+  selfAssignPrimaryKey = true
 
-  @column()
-  declare fullName: string | null
+  @column({ isPrimary: true })
+  declare id: string
+
+  @beforeCreate()
+  static assignUuid(user: User) {
+    user.id = randomUUID()
+  }
 
   @column()
   declare email: string
 
   @column({ serializeAs: null })
   declare password: string
+
+  @column()
+  declare fullName: string
+
+  @column()
+  declare course: string
+
+  @column()
+  declare rgm: string
+
+  @column.date()
+  declare validUntil: DateTime
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
