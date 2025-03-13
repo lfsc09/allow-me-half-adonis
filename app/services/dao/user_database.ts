@@ -43,8 +43,7 @@ export class UserDAODatabase implements UserDAO {
     return await User.create(input)
   }
 
-  async deleteUser(userId: string): Promise<void> {
-    const user = await User.find(userId)
-    if (user) await user.delete()
+  async deleteUser(user: User): Promise<void> {
+    await user.delete()
   }
 }
