@@ -10,7 +10,7 @@ export abstract class UserDAO {
   abstract deleteUserToken(userId: string, tokenId: string): Promise<void>
   abstract refreshUser(userId: string): Promise<void>
   abstract createUser(input: CreateUserInput): Promise<User>
-  abstract deleteUser(userId: string): Promise<void>
+  abstract deleteUser(user: User): Promise<void>
 }
 
 export type CreateUserInput = {

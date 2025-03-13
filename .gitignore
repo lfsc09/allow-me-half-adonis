@@ -2,7 +2,6 @@
 node_modules
 build
 tmp
-public
 
 # Secrets
 .env
@@ -28,3 +27,6 @@ yarn-error.log
 # Docker secrets
 /secrets/*
 !/secrets/*.example.*
+
+# Uploaded files in Storage
+storage

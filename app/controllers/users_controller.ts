@@ -36,8 +36,8 @@ export default class UsersController {
   async avatarFile({ response, request, session }: HttpContext, userFile: UserFile) {
     if (!session.has('user') || !(await this.userDAO.verifyUserToken(session.get('user').token))) return response.redirect('/logout')
     const userId = request.param('id')
-    const avatarInfo = await this.userDAO.getUser(userId)
-    return response.download(await userFile.getFilePath(avatarInfo.avatarId, avatarInfo?.avatarExt ?? ''))
+    const { avatarId, avatarExt } = await this.userDAO.getUser(userId)
+    return response.stream(await userFile.getAvatarFile(avatarId, avatarExt ?? ''))
   }
 
   async login({ request, response, session }: HttpContext) {
@@ -88,11 +88,18 @@ export default class UsersController {
     return response.redirect('/users')
   }
 
-  async delete({ request, response, session }: HttpContext) {
+  @inject()
+  async delete({ request, response, session }: HttpContext, userFile: UserFile) {
     if (!session.has('user') || !(await this.userDAO.verifyUserToken(session.get('user').token))) return response.redirect('/logout')
     if (!(await this.userDAO.isUserAdmin(session.get('user').uid))) return response.redirect('/home')
     const userId = request.param('id')
-    if (userId !== session.get('user').uid) await this.userDAO.deleteUser(userId)
+    if (userId !== session.get('user').uid) {
+      try {
+        const user = await this.userDAO.getUser(userId)
+        await this.userDAO.deleteUser(user)
+        await userFile.deleteFile(user.avatarId, user.avatarExt ?? '')
+      } catch (error) {}
+    }
     return response.redirect('/users')
   }
 }
