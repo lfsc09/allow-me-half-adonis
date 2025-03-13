@@ -9,14 +9,13 @@ export const loginValidator = vine.compile(
 
 export const createUserValidator = vine.compile(
   vine.object({
+    isAdmin: vine.accepted().optional(),
+    avatar: vine.file({
+      extnames: ['jpg', 'jpeg', 'png'],
+    }),
     email: vine.string().trim().minLength(1).maxLength(254).email(),
     password: vine.string().trim().minLength(8),
-  })
-)
-
-export const updateUserValidator = vine.compile(
-  vine.object({
-    email: vine.string().trim().minLength(1).maxLength(254).email().optional(),
-    password: vine.string().trim().minLength(8).optional(),
+    fullName: vine.string().trim().minLength(1).maxLength(254),
+    course: vine.string().trim().minLength(1).maxLength(254),
   })
 )
