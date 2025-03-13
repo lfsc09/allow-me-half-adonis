@@ -9,67 +9,47 @@
     @vite(['resources/css/app.css', 'resources/js/home.js'])
   </head>
   <body class="bg-gray-100 text-gray-900 flex flex-col items-center justify-center">
-    <header class="fixed top-0 left-0 right-0 z-50 h-20 bg-[#3980ff] shadow-md p-4">
-      <div class="h-full flex justify-center items-center text-white relative">
-        @svg('heroicons:chevron-left', { 'class': 'w-12 h-12 absolute left-0 top-0' })
-        <span class="text-xl font-semibold">Carteirinha</span>
-      </div>
-    </header>
-    <main class="xs:rotate-270">
-      <div
-        class="bg-radial-[at_25%_35%] from-[#004988] to-[#021c4c] to-75% p-8 rounded-xl shadow w-[550px] h-[330px]"
-      >
-        <section front class="h-full flex flex-col justify-between gap-12">
-          <div class="flex justify-between items-center">
-            <img src="{{ asset('resources/images/logo.svg') }}" alt="logo" class="w-60 h-24" />
-            <img
-              src="https://ui-avatars.com/api/?name={{ name }}&background=random"
-              alt="avatar"
-              class="w-24 h-32"
-            />
-          </div>
-          <div class="flex flex-col justify-center items-left text-white">
-            <span class="text-2xl">{{ name }}</span>
-            <span class="text-lg">{{ course }}</span>
-            <div class="flex justify-between items-center gap-16">
-              <span class="text-md">RGM: {{ rgm }}</span>
-              <span class="text-md">VALIDADE: {{ date }}</span>
+    @!component('components/header', { title: 'Carteirinha' })
+    <main class="flex-1 flex flex-col items-center justify-center w-full p-8 rotate-270 lg:rotate-0">
+      <div class="w-[550px] h-[330px] max-h-[330px]">
+        <div holder class="relative size-full transition duration-500 transform-3d">
+          <section class="absolute inset-0 size-full bg-radial-[at_25%_35%] from-[#004988] to-[#021c4c] to-75% p-8 rounded-xl shadow backface-hidden">
+            <div class="h-full flex flex-col justify-between gap-12">
+              <div class="flex justify-between items-center">
+                <img src="{{ asset('resources/images/logo.svg') }}" alt="logo" class="w-60 h-24" />
+                <object data="/user/avatar/{{ session.get('user').uid }}" type="image/png" class="w-fit h-32">
+                  <img src="https://ui-avatars.com/api/?name={{ name }}&background=random" alt="avatar" class="w-24 h-32" />
+                </object>
+              </div>
+              <div class="flex flex-col justify-center items-left text-white">
+                <span class="text-2xl">{{ name }}</span>
+                <span class="text-lg">{{ course }}</span>
+                <div class="flex justify-between items-center gap-16">
+                  <span class="text-md">RGM: {{ rgm }}</span>
+                  <span class="text-md">VALIDADE: {{ date }}</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </section>
-        <section back class="h-full flex flex-col justify-between gap-12 hidden">
-          <div class="flex flex-col justify-center gap-4 text-white mt-4">
-            <p class="text-center">
-              Este cartão é de uso pessoal e intransferível. Seu extravio, perda ou roubo deverá ser imediatamente comunicado à instituição no CAA - Centro de Atendimento ao Aluno.
-            </p>
-            <p class="text-center">
-              Se encontrado, favor entregá-lo na portaria da insituição.
-            </p>
-          </div>
-          <span class="text-gray-400 text-center text-sm font-semibold">Este cartão pode ser validado através do portal carteirinha.com</span>
-        </section>
+          </section>
+          <section class="absolute inset-0 size-full bg-radial-[at_25%_35%] from-[#004988] to-[#021c4c] to-75% p-8 pb-2 rounded-xl shadow backface-hidden rotate-y-180">
+            <div class="relative h-full flex flex-col justify-between gap-12">
+              <div class="flex flex-col justify-center gap-4 text-white mt-4">
+                <p class="text-center">
+                  Este cartão é de uso pessoal e intransferível. Seu extravio, perda ou roubo deverá ser imediatamente comunicado à instituição no CAA - Centro de Atendimento ao Aluno.
+                </p>
+                <p class="text-center">
+                  Se encontrado, favor entregá-lo na portaria da insituição.
+                </p>
+              </div>
+              <span class="text-gray-400 text-center text-sm font-semibold">Este cartão pode ser validado através do portal carteirinha.com</span>
+              <span class="absolute bottom-2 right-2 text-white">CÓDIGO: {{ cardCode }}</span>
+              <span class="rotate-270 absolute bottom-10 -right-[4.2rem] tracking-tighter text-gray-300 font-mono">carteirinha</span>
+            </div>
+          </section>
+        </div>
       </div>
     </main>
-    <footer class="fixed bottom-0 left-0 right-0 z-50 bg-gray-100 border-t-1 border-gray-300 p-4">
-      <div class="w-full flex justify-evenly items-center gap-10 text-white">
-        <div class="flex flex-col items-center text-gray-300">
-          @svg('heroicons:home-solid', { 'class': 'w-12 h-12' })
-          <span class="text-lg">Início</span>
-        </div>
-        <div class="flex flex-col items-center text-blue-500">
-          @svg('heroicons:device-phone-mobile', { 'class': 'w-12 h-12' })
-          <span class="text-lg">Carteirinha Digital</span>
-        </div>
-        <div class="flex flex-col items-center text-gray-300">
-          @svg('heroicons:archive-box', { 'class': 'w-12 h-12' })
-          <span class="text-lg">Ofertas</span>
-        </div>
-        <div class="flex flex-col items-center text-gray-300">
-          @svg('heroicons:qr-code', { 'class': 'w-12 h-12' })
-          <span class="text-lg">QRCode</span>
-        </div>
-      </div>
-    </footer>
+    @!component('components/footer', { url: 'home' })
   </body>
 </html>
 
