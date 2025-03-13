@@ -69,6 +69,7 @@
     "edge.js": "^6.2.1",
     "luxon": "^3.5.0",
     "pg": "^8.13.3",
+    "randexp": "^0.5.3",
     "reflect-metadata": "^0.2.2",
     "tailwindcss": "^4.0.12"
   },
