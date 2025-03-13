@@ -1,3 +1,5 @@
+import.meta.glob(['../images/logo.svg'])
+
 const flip = () => {
   const divEl = document.querySelector('div[holder]')
   if (divEl.hasAttribute('backword')) {
