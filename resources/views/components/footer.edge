@@ -1,0 +1,20 @@
+<footer class="w-full bg-gray-100 border-t-1 border-gray-300 p-4">
+  <div class="w-full flex justify-evenly items-center gap-10 text-white">
+    <a href="{{ route('/users') }}" class="flex flex-col items-center {{ url === 'users' ? 'text-blue-500' : 'text-gray-400' }}">
+      @svg('heroicons:home-solid', { 'class': 'w-8 h-8 lg:w-12 lg:h-12' })
+      <span class="text-sm lg:text-lg">Início</span>
+    </a>
+    <a href="{{ route('/home') }}" class="flex flex-col items-center {{ url === 'home' ? 'text-blue-500' : 'text-gray-400' }}">
+      @svg('heroicons:device-phone-mobile', { 'class': 'w-8 h-8 lg:w-12 lg:h-12' })
+      <span class="text-sm lg:text-lg">Carteirinha Digital</span>
+    </a>
+    <div class="flex flex-col items-center text-gray-400">
+      @svg('heroicons:gift-16-solid', { 'class': 'w-8 h-8 lg:w-12 lg:h-12' })
+      <span class="text-sm lg:text-lg">Ofertas</span>
+    </div>
+    <div class="flex flex-col items-center text-gray-400">
+      @svg('heroicons:qr-code', { 'class': 'w-8 h-8 lg:w-12 lg:h-12' })
+      <span class="text-sm lg:text-lg">QRCode</span>
+    </div>
+  </div>
+</footer>
