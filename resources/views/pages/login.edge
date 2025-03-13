@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Login
+    </title>
+    @vite(['resources/css/app.css'])
+  </head>
+  <body class="bg-gray-100 text-gray-900 flex flex-col items-center justify-center">
+    <div class="bg-white p-8 rounded shadow flex flex-col justify-center gap-8 min-w-[350px]">
+      <h2 class="text-2xl font-bold">
+        Allow half
+      </h2>
+      @error('E_INVALID_CREDENTIALS')
+        <div class="bg-red-100 text-red-700 p-2 rounded animate-bounce">
+          {{ $message }}
+        </div>
+      @end
+      
+      <form method="POST" action="{{ route('/login') }}">
+        {{ csrfField() }}
+        <div class="mb-4 w-full">
+          <label class="block mb-1">Email</label>
+          <input type="email" name="email" value="{{ old('email') || '' }}" required class="w-full p-2 border rounded" />
+          @inputError('email')
+            @each(message in $messages)
+              <p class="text-red-700 text-sm mt-1">
+                {{ message }}
+              </p>
+            @end
+          @end
+        </div>
+
+        <div class="mb-4 w-full">
+          <label class="block mb-1">Password</label>
+          <input type="password" name="password" required class="w-full p-2 border rounded" />
+          @inputError('password')
+            @each(message in $messages)
+              <p class="text-red-700 text-sm mt-1">
+                {{ message }}
+              </p>
+            @end
+          @end
+        </div>
+
+        <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded cursor-pointer">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,13 @@
+{
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "semi": false,
+  "singleQuote": true,
+  "useTabs": false,
+  "quoteProps": "consistent",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "printWidth": 180,
+  "tailwindStylesheet": "./resources/css/app.css",
+  "plugins": ["prettier-plugin-edgejs", "prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"]
+}
