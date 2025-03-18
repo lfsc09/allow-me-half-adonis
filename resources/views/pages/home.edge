@@ -11,38 +11,38 @@
   <body class="bg-gray-100 text-gray-900 flex flex-col items-center justify-center">
     @!component('components/header', { title: 'Carteirinha' })
     <main class="flex-1 flex flex-col items-center justify-center w-full p-8 rotate-270 lg:rotate-0">
-      <div class="w-[550px] h-[330px] max-h-[330px]">
+      <div class="w-[450px] h-[300px] max-h-[300px] lg:w-[550px] lg:h-[330px] lg:max-h-[330px]">
         <div holder class="relative size-full transition duration-500 transform-3d">
           <section class="absolute inset-0 size-full bg-radial-[at_25%_35%] from-[#004988] to-[#021c4c] to-75% p-8 rounded-xl shadow backface-hidden">
-            <div class="h-full flex flex-col justify-between gap-12">
-              <div class="flex justify-between items-center">
-                <img src="{{ asset('resources/images/logo.svg') }}" alt="logo" class="w-60 h-24" />
-                <object data="/user/avatar/{{ session.get('user').uid }}" type="image/png" class="w-fit h-32">
-                  <img src="https://ui-avatars.com/api/?name={{ name }}&background=random" alt="avatar" class="w-24 h-32" />
+            <div class="h-full flex flex-col justify-between gap-8">
+              <div class="flex justify-between items-start">
+                <img src="{{ asset('resources/images/logo.svg') }}" alt="logo" class="w-56 h-24 lg:w-72 lg:h-24" />
+                <object data="/user/avatar/{{ session.get('user').uid }}" type="image/png" class="w-24 h-28 lg:w-fit lg:h-32">
+                  <img src="https://ui-avatars.com/api/?name={{ name }}&background=random" alt="avatar" class="w-24 h-28 lg:w-24 lg:h-32" />
                 </object>
               </div>
-              <div class="flex flex-col justify-center items-left text-white">
-                <span class="text-2xl">{{ name }}</span>
-                <span class="text-lg">{{ course }}</span>
+              <div class="flex flex-col justify-center items-left text-slate-200">
+                <span class="text-xl lg:text-2xl">{{ name }}</span>
+                <span class="text-md lg:text-lg">{{ course }}</span>
                 <div class="flex justify-between items-center gap-16">
-                  <span class="text-md">RGM: {{ rgm }}</span>
-                  <span class="text-md">VALIDADE: {{ date }}</span>
+                  <span class="text-sm lg:text-md">RGM: {{ rgm }}</span>
+                  <span class="text-sm lg:text-md">VALIDADE: {{ date }}</span>
                 </div>
               </div>
             </div>
           </section>
           <section class="absolute inset-0 size-full bg-radial-[at_25%_35%] from-[#004988] to-[#021c4c] to-75% p-8 pb-2 rounded-xl shadow backface-hidden rotate-y-180">
-            <div class="relative h-full flex flex-col justify-between gap-12">
-              <div class="flex flex-col justify-center gap-4 text-white mt-4">
-                <p class="text-center">
+            <div class="relative h-full flex flex-col justify-between gap-8">
+              <div class="flex flex-col justify-center gap-4 text-slate-200 mt-4">
+                <p class="text-center text-sm lg:text-md">
                   Este cartão é de uso pessoal e intransferível. Seu extravio, perda ou roubo deverá ser imediatamente comunicado à instituição no CAA - Centro de Atendimento ao Aluno.
                 </p>
-                <p class="text-center">
+                <p class="text-center text-sm lg:text-md">
                   Se encontrado, favor entregá-lo na portaria da insituição.
                 </p>
               </div>
-              <span class="text-gray-400 text-center text-sm font-semibold">Este cartão pode ser validado através do portal carteirinha.com</span>
-              <span class="absolute bottom-2 right-2 text-white">CÓDIGO: {{ cardCode }}</span>
+              <span class="text-gray-400 text-center text-xs lg:text-sm font-semibold">Este cartão pode ser validado através do portal carteirinha.com</span>
+              <span class="absolute bottom-2 right-2 text-slate-200">CÓDIGO: {{ cardCode }}</span>
               <span class="rotate-270 absolute bottom-10 -right-[4.2rem] tracking-tighter text-gray-300 font-mono">carteirinha</span>
             </div>
           </section>
