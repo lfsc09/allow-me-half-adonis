@@ -9,7 +9,7 @@ docker compose up --build --detach
 ```
 
 ```bash
-docker compose down
+docker compose down rmi --all
 ```
 
 #### 2. Run Migrations & Seeds

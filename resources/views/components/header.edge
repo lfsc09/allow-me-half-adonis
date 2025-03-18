@@ -1,7 +1,7 @@
-<header class="w-full h-20 bg-[#3980ff] shadow-md p-4">
-  <div class="h-full flex justify-center items-center text-white relative">
-    <a href="{{ route('/logout') }}">
-      @svg('heroicons:chevron-left', { 'class': 'w-12 h-12 absolute left-0 top-0' })
+<header class="w-full bg-[#3980ff] shadow-md p-4">
+  <div class="flex justify-center items-center text-white relative">
+    <a href="{{ route('/logout') }}" class="w-8 h-8 lg:w-12 lg:h-12">
+      @svg('heroicons:chevron-left', { 'class': 'w-8 h-8 lg:w-12 lg:h-12 absolute left-0 top-0' })
     </a>
     <span class="text-xl font-semibold">{{ title }}</span>
   </div>
